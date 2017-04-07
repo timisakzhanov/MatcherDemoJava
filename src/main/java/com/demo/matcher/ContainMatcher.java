@@ -16,11 +16,12 @@ public class ContainMatcher implements Matcher {
 
     @Override
     public void match(List<String> lines, List<String> patterns) {
-        System.out.println("Lines that contains patterns: ");
+        userIO.printMessage("///////////////////////////////");
+        userIO.printMessage("Lines that contains patterns: ");
         for (String line : lines) {
             for (String pattern: patterns) {
                 if (line.contains(pattern)) {
-                    System.out.println(line);
+                    userIO.printMessage(line);
                 }
             }
         }

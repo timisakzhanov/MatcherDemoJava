@@ -25,7 +25,7 @@ public class LinesSearcher {
             textLines = Utils.readLinesFromFile(textFile);
             patternLines = Utils.readLinesFromFile(patternsFile);
         } catch (IOException e) {
-            userIO.printMessage(e.getMessage());
+            e.printStackTrace();
         }
     }
 

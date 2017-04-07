@@ -14,6 +14,7 @@ public class LevensteinMatcher implements Matcher {
 
     @Override
     public void match(List<String> lines, List<String> patterns) {
+        userIO.printMessage("///////////////////////////////");
         userIO.printMessage("Lines require no more than 1 changes to match pattern: ");
         for (String line : lines) {
             for (String pattern : patterns) {
