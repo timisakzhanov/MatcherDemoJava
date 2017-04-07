@@ -5,13 +5,11 @@ import com.demo.io.UserCommunicationInterface;
 import com.demo.matcher.Matcher;
 import com.demo.matcher.MatchersFactory;
 import com.demo.utils.Utils;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by tim_isakjanov on 4/6/17.
- */
 public class LinesSearcher {
     private List<String> textLines;
     private List<String> patternLines;
@@ -25,7 +23,7 @@ public class LinesSearcher {
             textLines = Utils.readLinesFromFile(textFile);
             patternLines = Utils.readLinesFromFile(patternsFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerFactory.getLogger(LinesSearcher.class).error("error" , e.fillInStackTrace());
         }
     }
 
@@ -50,7 +48,7 @@ public class LinesSearcher {
         try {
             method = Integer.valueOf(input);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            LoggerFactory.getLogger(LinesSearcher.class).error("error" , e.fillInStackTrace());
         }
         return method;
     }
