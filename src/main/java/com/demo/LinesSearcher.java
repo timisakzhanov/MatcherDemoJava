@@ -29,12 +29,29 @@ public class LinesSearcher {
         }
     }
 
-    public void searchForMatches(int matchType) {
+    public void searchForMatches() {
         if (textLines == null || patternLines == null) {
+            userIO.printMessage("Put files text.txt and patterns.txt to MatcherDemo folder");
             return;
         }
-
+        int matchType = askForMethod();
         matcher = MatchersFactory.getMatcher(matchType, userIO);
+        if (matcher == null) {
+            userIO.printMessage("Wrong matcher type");
+            return;
+        }
         matcher.match(textLines, patternLines);
+    }
+
+    private int askForMethod() {
+        int method = -1;
+        userIO.printMessage("Select method to use (1 - exact, 2 - contain, 3 - levenstein): ");
+        String input = userIO.readInput();
+        try {
+            method = Integer.valueOf(input);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return method;
     }
 }

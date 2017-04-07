@@ -13,7 +13,6 @@ public class ExactMatcher implements Matcher {
 
     @Override
     public void match(List<String> lines, List<String> patterns) {
-        userIO.printMessage("///////////////////////////////");
         userIO.printMessage("Lines that exactly match patterns: ");
         for(String line : lines) {
             for(String pattern : patterns) {
