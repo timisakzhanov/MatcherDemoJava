@@ -33,16 +33,27 @@ public class LinesSearcher {
             return;
         }
         String matchType = askForMethod();
-        matcher = MatchersFactory.getMatcher(matchType, userIO);
+        matcher = MatchersFactory.getMatcher(matchType);
         if (matcher == null) {
-            userIO.printMessage("Wrong matcher type");
+            userIO.printMessage("Wrong method name");
             return;
         }
-        matcher.match(textLines, patternLines);
+
+        List<String> matches = matcher.match(textLines, patternLines);
+        printMatches(matches);
     }
 
     private String askForMethod() {
         userIO.printMessage("Select method to use (exact, contain or levenstein): ");
         return userIO.readInput();
+    }
+
+    private void printMatches(List<String> matches) {
+        if (matches == null || matches.size() == 0) {
+            userIO.printMessage("Nothing found");
+        }
+        for (String line : matches) {
+            userIO.printMessage(line);
+        }
     }
 }

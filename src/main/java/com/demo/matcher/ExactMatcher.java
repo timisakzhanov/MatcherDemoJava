@@ -1,35 +1,30 @@
 package com.demo.matcher;
 
-import com.demo.io.IOInterface;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExactMatcher implements Matcher {
-    private IOInterface userIO;
     private static ExactMatcher instance;
-
-    private ExactMatcher(IOInterface userIO) {
-        this.userIO = userIO;
-    }
 
     private ExactMatcher() {}
 
-    public static ExactMatcher getInstance(IOInterface userIO) {
+    public static ExactMatcher getInstance() {
         if (instance == null) {
-            instance = new ExactMatcher(userIO);
+            instance = new ExactMatcher();
         }
         return instance;
     }
 
     @Override
-    public void match(List<String> lines, List<String> patterns) {
-        userIO.printMessage("Lines that exactly match patterns: ");
+    public List<String> match(List<String> lines, List<String> patterns) {
+        List<String> matches = new ArrayList<String>();
         for(String line : lines) {
             for(String pattern : patterns) {
                 if (line.equals(pattern)) {
-                    userIO.printMessage(line);
+                    matches.add(line);
                 }
             }
         }
+        return matches;
     }
 }

@@ -1,36 +1,32 @@
 package com.demo.matcher;
 
-import com.demo.io.IOInterface;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LevensteinMatcher implements Matcher {
-    private IOInterface userIO;
     private static LevensteinMatcher instance;
 
     private LevensteinMatcher() {}
 
-    private LevensteinMatcher(IOInterface userIO) {
-        this.userIO = userIO;
-    }
-
-    public static LevensteinMatcher getInstance(IOInterface io) {
+    public static LevensteinMatcher getInstance() {
         if (instance == null) {
-            instance = new LevensteinMatcher(io);
+            instance = new LevensteinMatcher();
         }
         return instance;
     }
 
     @Override
-    public void match(List<String> lines, List<String> patterns) {
-        userIO.printMessage("Lines require no more than 1 changes to match pattern: ");
+    public List<String> match(List<String> lines, List<String> patterns) {
+        List<String> matches = new ArrayList<String>();
         for (String line : lines) {
             for (String pattern : patterns) {
                 if (StringUtils.getLevenshteinDistance(line, pattern) <= 1) {
-                    userIO.printMessage(line);
+                    matches.add(line);
                 }
             }
         }
+        return matches;
     }
 }
