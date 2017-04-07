@@ -1,15 +1,25 @@
 package com.demo.matcher;
 
-import com.demo.io.UserCommunicationInterface;
+import com.demo.io.IOInterface;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
 public class LevensteinMatcher implements Matcher {
-    UserCommunicationInterface userIO;
+    private IOInterface userIO;
+    private static LevensteinMatcher instance;
 
-    public LevensteinMatcher(UserCommunicationInterface userIO) {
+    private LevensteinMatcher() {}
+
+    private LevensteinMatcher(IOInterface userIO) {
         this.userIO = userIO;
+    }
+
+    public static LevensteinMatcher getInstance(IOInterface io) {
+        if (instance == null) {
+            instance = new LevensteinMatcher(io);
+        }
+        return instance;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.demo;
 
-import com.demo.io.ConsoleCommunication;
-import com.demo.io.UserCommunicationInterface;
+import com.demo.io.ConsoleIO;
+import com.demo.io.IOInterface;
 import com.demo.matcher.Matcher;
 import com.demo.matcher.MatchersFactory;
 import com.demo.utils.Utils;
@@ -14,10 +14,10 @@ public class LinesSearcher {
     private List<String> textLines;
     private List<String> patternLines;
     private Matcher matcher;
-    private UserCommunicationInterface userIO;
+    private IOInterface userIO;
 
     public LinesSearcher(String textFile, String patternsFile) {
-        userIO = new ConsoleCommunication();
+        userIO = ConsoleIO.getInstance();
 
         try {
             textLines = Utils.readLinesFromFile(textFile);
@@ -32,7 +32,7 @@ public class LinesSearcher {
             userIO.printMessage("Put files text.txt and patterns.txt to MatcherDemo folder");
             return;
         }
-        int matchType = askForMethod();
+        String matchType = askForMethod();
         matcher = MatchersFactory.getMatcher(matchType, userIO);
         if (matcher == null) {
             userIO.printMessage("Wrong matcher type");
@@ -41,15 +41,8 @@ public class LinesSearcher {
         matcher.match(textLines, patternLines);
     }
 
-    private int askForMethod() {
-        int method = -1;
-        userIO.printMessage("Select method to use (1 - exact, 2 - contain, 3 - levenstein): ");
-        String input = userIO.readInput();
-        try {
-            method = Integer.valueOf(input);
-        } catch (NumberFormatException e) {
-            LoggerFactory.getLogger(LinesSearcher.class).error("error" , e.fillInStackTrace());
-        }
-        return method;
+    private String askForMethod() {
+        userIO.printMessage("Select method to use (exact, contain or levenstein): ");
+        return userIO.readInput();
     }
 }

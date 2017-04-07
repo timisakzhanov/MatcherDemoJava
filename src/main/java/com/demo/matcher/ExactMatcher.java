@@ -1,14 +1,24 @@
 package com.demo.matcher;
 
-import com.demo.io.UserCommunicationInterface;
+import com.demo.io.IOInterface;
 
 import java.util.List;
 
 public class ExactMatcher implements Matcher {
-    private UserCommunicationInterface userIO;
+    private IOInterface userIO;
+    private static ExactMatcher instance;
 
-    public ExactMatcher(UserCommunicationInterface userIO) {
+    private ExactMatcher(IOInterface userIO) {
         this.userIO = userIO;
+    }
+
+    private ExactMatcher() {}
+
+    public static ExactMatcher getInstance(IOInterface userIO) {
+        if (instance == null) {
+            instance = new ExactMatcher(userIO);
+        }
+        return instance;
     }
 
     @Override

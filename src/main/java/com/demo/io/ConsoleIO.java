@@ -5,11 +5,19 @@ import java.util.Scanner;
 /**
  * Created by tim_isakjanov on 4/6/17.
  */
-public class ConsoleCommunication implements UserCommunicationInterface {
+public class ConsoleIO implements IOInterface {
     private Scanner scanner;
+    private static ConsoleIO instance;
 
-    public ConsoleCommunication() {
+    private ConsoleIO() {
         scanner = new Scanner(System.in);
+    }
+
+    public static ConsoleIO getInstance() {
+        if (instance == null) {
+            instance = new ConsoleIO();
+        }
+        return instance;
     }
 
     @Override

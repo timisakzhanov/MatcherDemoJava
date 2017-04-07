@@ -1,6 +1,6 @@
 package com.demo.io;
 
-public interface UserCommunicationInterface {
+public interface IOInterface {
     void printMessage(String message);
 
     String readInput();

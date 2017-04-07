@@ -1,6 +1,6 @@
 package com.demo.matcher;
 
-import com.demo.io.UserCommunicationInterface;
+import com.demo.io.IOInterface;
 
 import java.util.List;
 
@@ -8,10 +8,20 @@ import java.util.List;
  * Created by tim_isakjanov on 4/6/17.
  */
 public class ContainMatcher implements Matcher {
-    UserCommunicationInterface userIO;
+    private IOInterface userIO;
+    private static ContainMatcher instance;
 
-    public ContainMatcher(UserCommunicationInterface userIO) {
+    private ContainMatcher() {}
+
+    private ContainMatcher(IOInterface userIO) {
         this.userIO = userIO;
+    }
+
+    public static ContainMatcher getInstance(IOInterface io) {
+        if (instance == null) {
+            instance = new ContainMatcher(io);
+        }
+        return instance;
     }
 
     @Override
