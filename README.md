@@ -4,8 +4,8 @@ Application reads text lines from file ```MatcherDemo/text.txt``` and reads patt
 Then it asks user to choose method for matching lines with pattern lines. User may select one of the below options:
 - exact - will select only lines that have exact matching with any of the pattern lines
 - contain - will select only lines that contain any of the pattern lines
-- levenstein - will select only lines that contain a match with edit distance <= 1
-At the end, application displays lines that match to the given pattern lines.
+- levenstein - will select only lines that contain a match with edit distance <= 1.
+At the end, application will display lines that match to the given pattern lines.
 
 
 
